@@ -69,6 +69,7 @@ def save_sample_png(opt, epoch, noisy_img, recon_img, gt_img, addition_str = '')
         img_copy = img.clone().data.permute(0, 2, 3, 1).cpu().numpy()
         img_copy = np.clip(img_copy, 0, 255)
         img_copy = img_copy.astype(np.uint8)[0, :, :, :]
+        img_copy = cv2.cvtColor(img_copy, cv2.COLOR_BGR2RGB)
         # If there is QuadBayer
         if img_copy.shape[2] == 6:
             temp = np.zeros((img_copy.shape[0] * 2, img_copy.shape[1] * 2, img_copy.shape[2] // 2), dtype = np.uint8)
